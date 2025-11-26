@@ -1,7 +1,7 @@
 class Fone:
     def __init__(self, id: str, number: str):
-        self.id = id
-        self.number = number
+        self.__id = id
+        self.__number = number
 
     def getId(self):
         return self.id
@@ -18,5 +18,18 @@ class Fone:
 
     def __str__(self):
         return f"{self.id}:{self.number}"
+
+class Contact:
+    def __init__(self, name: str):
+        self.__name = name
+        self.__fones: list[Fone] = []
+        self.__favorited: bool = favorited
+
+    def addFone(self, id: str, number: str) -> None:
+        fone = Fone(id, number)
+        if fone.isValid():
+            self.fone.append(fone)
+        else:
+            print("fail: comando inexistente")
 
     
