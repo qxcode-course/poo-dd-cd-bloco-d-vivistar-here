@@ -1,0 +1,9 @@
+{
+    "patches": [
+        {
+            "label": "2025-11-26_21-42-05",
+            "content": "class Fone:\n    def __init__(self, id: str, number: str):\n        self.id = id\n        self.number = number\n\n    def getId(self):\n        return self.id\n\n    def getNumber(self):\n        return self.number",
+            "lines": "10"
+        }
+    ]
+}
