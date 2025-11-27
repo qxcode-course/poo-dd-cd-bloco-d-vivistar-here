@@ -3,21 +3,21 @@ class Fone:
         self.__id = id
         self.__number = number
 
-    def getId(self):
-        return self.id
+    def getId(self, id: str):
+        return self.__id
 
-    def getNumber(self):
-        return self.number
+    def getNumber(self, number: str):
+        return self.__number
 
     def isValid(self) -> bool:
         validos = "0123456789"
-        for c in self.number:
+        for c in self.__number:
             if c not in validos:
                 return False
             return True
 
     def __str__(self):
-        return f"{self.id}:{self.number}"
+        return f"{self.__id}:{self.__number}"
 
 class Contact:
     def __init__(self, name: str):
@@ -28,8 +28,29 @@ class Contact:
     def addFone(self, id: str, number: str) -> None:
         fone = Fone(id, number)
         if fone.isValid():
-            self.fone.append(fone)
+            self.fones.append(fone)
         else:
             print("fail: comando inexistente")
 
-    
+    def rmFone(self, index: int) -> None:
+        if 0 < index < len(self.__fones):
+            self.fones.pop(index)
+        else:
+            print("fail: comando inexistente")
+
+    def toggleFavorited(self) -> None:
+        self.favorite = not self.favorite
+
+    def isFavorited(self) -> bool:
+        return self.favorited
+
+    def getFones(self) -> list:
+        return self.__fones
+
+    def getName(self, name: str):
+        return self.__name
+
+    def setName(self, name: str) -> None:
+        self.__name = name
+
+    def __str__(self) -> str:
