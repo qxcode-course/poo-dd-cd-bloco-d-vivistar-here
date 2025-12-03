@@ -89,4 +89,25 @@ class Agenda:
             return None
 
         def rmContact(self, name: str):
+            pos = self.__findPosByName(name)
+            if pos == -1:
+                print("fail: contato não existe")
+                return
+            self.contacts.pop(pos)
+
+        def search(self, pattern: str) -> List[Contact]:
+            result = []
+            pattern = pattern.lower()
+            for contact in self.__contacts:
+                name_match = pattern in contact.getName().lower()
+                fone_match_match = False
+
+                for fone in contact.getFones():
+                     if pattern in fone.getId().lower or pattern in fone.getNumber().lower():
+                        fone_match = True
+                        break
             
+                if name_match or fone_match:
+                    result.append(contact)
+            return result
+        
