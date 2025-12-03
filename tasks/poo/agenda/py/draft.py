@@ -54,3 +54,23 @@ class Contact:
         self.__name = name
 
     def __str__(self) -> str:
+        prefix = "@ " if self.favorited else "- "
+        phones_str = ", ".join([f"{i}:{str(fone)}" for i, fone in enumerate(self.__fones)])
+        return f"{prefix}{self.__name} [{phones_str}]"
+
+class Agenda:
+    def __init__(self):
+        self.__contacts = []
+
+    def __findPosByName(self, name: str) -> int:
+        for i in range(len(self.__contacts)):
+            contact = self.__contacts[i]
+            if contact.getName() == name:
+                return id
+        return -1
+
+    def addContact(self, name: str, fones: list):
+        pos = self.__findPosByName(name)
+        if pos != -1:
+            contact = self.__contacts[pos]
+            
