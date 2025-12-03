@@ -73,4 +73,20 @@ class Agenda:
         pos = self.__findPosByName(name)
         if pos != -1:
             contact = self.__contacts[pos]
+            for fone in fones:
+                contact.addFone(fone.__id, fone.__number)
+        else:
+            novo = Contact(name)
+            for fone in fones:
+                novo.addFOne(fone.__id, fone.__number)
+                self.__contacts.append(novo)
+                self.__contacts.sort(key=lambda contact: contact.getName())
+
+        def getContact(self, name: str):
+            for contact in self.__contacts:
+                if contact.getName() == name:
+                    return contact 
+            return None
+
+        def rmContact(self, name: str):
             
