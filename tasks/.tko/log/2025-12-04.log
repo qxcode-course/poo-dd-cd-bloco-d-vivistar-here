@@ -57,3 +57,29 @@
 2025-12-04 02:47:24, EXEC, v:1, k:poo@agenda, mode:FULL, rate:0
 2025-12-04 02:50:50, EXEC, v:1, k:poo@agenda, mode:FULL, rate:0, size:232
 2025-12-04 02:50:51, EXEC, v:1, k:poo@agenda, mode:FULL, rate:0
+2025-12-04 02:58:42, EXEC, v:1, k:poo@agenda, mode:FULL, rate:0, size:228
+2025-12-04 02:58:42, EXEC, v:1, k:poo@agenda, mode:FULL, rate:0, size:228
+2025-12-04 03:01:24, EXEC, v:1, k:poo@agenda, mode:FULL, rate:0, size:228
+2025-12-04 03:02:38, EXEC, v:1, k:poo@agenda, mode:FULL, rate:0, size:228
+2025-12-04 03:02:39, MOVE, v:1, k:poo@agenda, mode:BACK
+2025-12-04 03:10:39, MOVE, v:1, k:poo@agenda, mode:PICK
+2025-12-04 03:10:39, EXEC, v:1, k:poo@agenda, mode:FULL, rate:0, size:229
+2025-12-04 03:10:39, EXEC, v:1, k:poo@agenda, mode:FULL, rate:0, size:229
+2025-12-04 03:10:41, EXEC, v:1, k:poo@agenda, mode:FULL, rate:0, size:229
+2025-12-04 03:14:05, EXEC, v:1, k:poo@agenda, mode:FULL, rate:0, size:217
+2025-12-04 03:14:05, MOVE, v:1, k:poo@agenda, mode:BACK
+2025-12-04 03:22:55, MOVE, v:1, k:poo@agenda, mode:PICK
+2025-12-04 03:22:56, EXEC, v:1, k:poo@agenda, mode:FULL, rate:0, size:193
+2025-12-04 03:22:57, EXEC, v:1, k:poo@agenda, mode:FULL, rate:0
+2025-12-04 03:24:22, EXEC, v:1, k:poo@agenda, mode:FULL, rate:0, size:193
+2025-12-04 03:24:34, EXEC, v:1, k:poo@agenda, mode:FULL, rate:0, size:193
+2025-12-04 03:24:35, EXEC, v:1, k:poo@agenda, mode:FULL, rate:0
+2025-12-04 03:25:03, EXEC, v:1, k:poo@agenda, mode:FULL, rate:0, size:193
+2025-12-04 03:25:52, EXEC, v:1, k:poo@agenda, mode:FULL, rate:0, size:193
+2025-12-04 03:27:32, EXEC, v:1, k:poo@agenda, mode:FULL, rate:0, size:193
+2025-12-04 03:27:33, EXEC, v:1, k:poo@agenda, mode:FULL, rate:0
+2025-12-04 03:29:17, EXEC, v:1, k:poo@agenda, mode:FULL, rate:75, size:193
+2025-12-04 03:36:55, EXEC, v:1, k:poo@agenda, mode:FULL, rate:0, size:201
+2025-12-04 03:36:55, EXEC, v:1, k:poo@agenda, mode:FULL, rate:0, size:201
+2025-12-04 03:39:31, EXEC, v:1, k:poo@agenda, mode:FULL, rate:87, size:177
+2025-12-04 03:40:39, EXEC, v:1, k:poo@agenda, mode:FULL, rate:87
