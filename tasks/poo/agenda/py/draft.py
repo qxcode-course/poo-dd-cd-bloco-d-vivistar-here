@@ -30,13 +30,13 @@ class Contact:
     def addFone(self, id: str, number: str) -> None:
         fone = Fone(id, number)
         if fone.isValid():
-            self.fones.append(fone)
+            self.__fones.append(fone)
         else:
             print("fail: comando inexistente")
 
     def rmFone(self, index: int) -> None:
         if 0 <= index < len(self.__fones):
-            self.fones.pop(index)
+            self.__fones.pop(index)
         else:
             print("fail: comando inexistente")
 
@@ -94,7 +94,7 @@ class Agenda:
         if pos == -1:
             print("fail: contato não existe")
         else:
-            self.contacts.pop(pos)
+            self.__contacts.pop(pos)
 
     def search(self, pattern: str) -> List[Contact]:
         result = []
@@ -104,7 +104,7 @@ class Agenda:
             fone_match = False
 
             for fone in contact.getFones():
-                if pattern in fone.getId().lower or pattern in fone.getNumber().lower():
+                if pattern in fone.getId().lower() or pattern in fone.getNumber().lower():
                     fone_match = True
                     break
             
@@ -124,7 +124,7 @@ class Agenda:
 
     def __str__(self) -> str:
         result = []
-        for contact in self.contacts:
+        for contact in self.__contacts:
             result.append(str(contact))
         return "\n".join(result)
 
@@ -151,7 +151,7 @@ def main():
                 if ":" not in fone:
                     print("fail: fone inválido")
                     continue
-                id, number = item.split(":")
+                id, number = fone.split(":")
                 fones.append(Fone(id, number))
 
             agenda.addContact(name, fones)
@@ -175,7 +175,7 @@ def main():
                 continue
             name = args[1]
             index = int(args[2])
-            contact = agenda.getcontact(name)
+            contact = agenda.getContact(name)
 
             if contact is None:
                 print("fail: contato não existe")
@@ -226,7 +226,7 @@ def main():
             for contact in agenda.getFavorited():
                 print(contact)
 
-            else:
+        else:
                 print("fail: comando inválido")
 
 main()
