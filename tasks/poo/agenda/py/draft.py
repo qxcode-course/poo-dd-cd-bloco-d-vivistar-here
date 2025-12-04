@@ -162,8 +162,71 @@ def main():
                 continue
             print(agenda)
 
-        
+        elif args[0] == "rm":
+            if agenda is None:
+                print("fail: agenda não inicializada")
+                continue
+            name = args[1]
+            agenda.rmContact(name)
 
+        elif args[0] == "rmFone":
+            if agenda is None:
+                print("fail: agenda não inicializada")
+                continue
+            name = args[1]
+            index = int(args[2])
+            contact = agenda.getcontact(name)
 
+            if contact is None:
+                print("fail: contato não existe")
+                continue
+            contact.rmFone(index)
+
+        elif args[0] == "search":
+            if agenda is None:
+                print("fail: agenda não inicializada")
+                continue
+
+            pattern = args[1]
+            result = agenda.search(pattern)
+
+            for contact in result:
+                print(contact)
+
+        elif args[0] == "fav":
+            if agenda is None:
+                print("fail: agenda não inicializada")
+                continue
+            name = args[1]
+            contact = agenda.getContact(name)
+
+            if contact is None:
+                print("fail: contato não existe")
+                continue
+            
+            contact.toggleFavorited()
+
+        elif args[0] == "unfav":
+            if agenda is None:
+                print("fail: agenda não inicializada")
+                continue
+            name = args[1]
+            contact = agenda.getContact(name)
+
+            if contact is None:
+                print("fail: contato não existe")
+                continue
+            contact.toggleFavorited()
+
+        elif args[0] == "showFav":
+            if agenda is None:
+                print("fail: agenda não inicializada")
+                continue
+            
+            for contact in agenda.getFavorited():
+                print(contact)
+
+            else:
+                print("fail: comando inválido")
 
 main()
