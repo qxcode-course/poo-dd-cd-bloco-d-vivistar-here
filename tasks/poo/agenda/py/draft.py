@@ -12,11 +12,7 @@ class Fone:
         return self.__number
 
     def isValid(self) -> bool:
-        validos = "0123456789"
-        for c in self.__number:
-            if c not in validos:
-                return False
-        return True
+        return self.__number.isdigit()
 
     def __str__(self):
         return f"{self.__id}:{self.__number}"
@@ -32,13 +28,13 @@ class Contact:
         if fone.isValid():
             self.__fones.append(fone)
         else:
-            print("fail: comando inexistente")
+            print("fail: fone invalido")
 
     def rmFone(self, index: int) -> None:
         if 0 <= index < len(self.__fones):
             self.__fones.pop(index)
         else:
-            print("fail: comando inexistente")
+            print("fail: indice invalido")
 
     def toggleFavorited(self) -> None:
         self.__favorited = not self.__favorited
@@ -80,8 +76,8 @@ class Agenda:
             novo = Contact(name)
             for fone in fones:
                 novo.addFone(fone.getId(), fone.getNumber())
-                self.__contacts.append(novo)
-                self.__contacts.sort(key=lambda contact: contact.getName())
+            self.__contacts.append(novo)
+            self.__contacts.sort(key=lambda contact: contact.getName())
 
     def getContact(self, name: str):
         for contact in self.__contacts:
@@ -150,11 +146,11 @@ def main():
             for fone in args[2:]:
                 if ":" not in fone:
                     print("fail: fone inválido")
-                    continue
-                id, number = fone.split(":")
+                    break
+                id, number = fone.split(":", 1)
                 fones.append(Fone(id, number))
-
-            agenda.addContact(name, fones)
+            else:
+                agenda.addContact(name, fones)
 
         elif args[0] == "show":
             if agenda is None:
