@@ -36,7 +36,7 @@ class Contact:
         else:
             print("fail: indice invalido")
 
-    def toogleFavorited(self):
+    def toggleFavorited(self):
         self.__favorited = not self.__favorited
 
     def isFavorited(self) -> bool:
@@ -167,11 +167,12 @@ def main():
             name = args[1]
             contact = agenda.getContact(name)
             if contact:
-                contact.toogleFavorited()
+                contact.toggleFavorited()
+            else:
+                print("fail: contato nao existe")
 
         
-        elif args[0] == "fav":
-            fav = agenda.getFavorited()
-            for contact in fav:
+        elif args[0] == "favs":
+            for contact in agenda.getFavorited():
                 print(contact)
 main()
