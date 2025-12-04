@@ -53,8 +53,8 @@ class Contact:
 
     def __str__(self) -> str:
         prefix = "@ " if self.__favorited else "- "
-        fones_str = ", ".join([f"{i}:{fone}" for i, fone in enumerate(self.__fones)])
-        return f"{fav} {self.__name} [{fones_str}]"
+        fones_str = ", ".join(str(fone) for fone in self.__fones)
+        return f"{prefix}{self.__name} [{fones_str}]"
 
 class Agenda:
     def __init__(self):
@@ -97,7 +97,7 @@ class Agenda:
         pattern = pattern.lower()
         for contact in self.__contacts:
             if pattern in contact.getName().lower():
-                results.append(contact)
+                result.append(contact)
                 continue
             for fone in contact.getFones():
                 if pattern in fone.getId().lower() or pattern in fone.getNumber():
@@ -163,35 +163,15 @@ def main():
             for contact in agenda.search(pattern):
                 print(contact)
 
-        elif args[0] == "fav":
+        elif args[0] == "tfav":
             name = args[1]
             contact = agenda.getContact(name)
             if contact:
                 contact.toogleFavorited()
-            else:
-                print("fail: contato nao existe")
 
-        elif args[0] == "unfav":
-            if agenda is None:
-                print("fail: agenda não inicializada")
-                continue
-            name = args[1]
-            contact = agenda.getContact(name)
-
-            if contact is None:
-                print("fail: contato não existe")
-                continue
-            contact.toggleFavorited()
-
-        elif args[0] == "showFav":
-            if agenda is None:
-                print("fail: agenda não inicializada")
-                continue
-            
-            for contact in agenda.getFavorited():
+        
+        elif args[0] == "fav":
+            fav = agenda.getFavorited()
+            for contact in fav:
                 print(contact)
-
-        else:
-                print("fail: comando inválido")
-
 main()
