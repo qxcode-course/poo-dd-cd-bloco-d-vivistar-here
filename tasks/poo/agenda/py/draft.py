@@ -127,17 +127,14 @@ def main():
             break
 
         elif args[0] == "add":
-            if agenda is None:
-                print("fail: agenda não inicializada")
-                continue
             name = args[1]
-            fones = []
-            for fone in args[2:]:
-                if ":" not in fone:
-                    print("fail: fone inválido")
+            fones: List[List[str]] = []
+            for fone_str in args[2:]:
+                if ":" not in fone_str:
+                    print("fail: fone invalido")
                     break
-                id, number = fone.split(":", 1)
-                fones.append(Fone(id, number))
+                id, number = fone_str.split(":")
+                fones.append([id, number])
             else:
                 agenda.addContact(name, fones)
 
@@ -148,48 +145,31 @@ def main():
             print(agenda)
 
         elif args[0] == "rm":
-            if agenda is None:
-                print("fail: agenda não inicializada")
-                continue
             name = args[1]
             agenda.rmContact(name)
-
+        
         elif args[0] == "rmFone":
-            if agenda is None:
-                print("fail: agenda não inicializada")
-                continue
             name = args[1]
             index = int(args[2])
             contact = agenda.getContact(name)
 
-            if contact is None:
-                print("fail: contato não existe")
-                continue
-            contact.rmFone(index)
+            if contact:
+                contact.rmFone(index)
+            else:
+                print("fail: contato nao existe")
 
         elif args[0] == "search":
-            if agenda is None:
-                print("fail: agenda não inicializada")
-                continue
-
-            pattern = args[1]
-            result = agenda.search(pattern)
-
-            for contact in result:
+            pattern = args[1]    
+            for contact in agenda.search(pattern):
                 print(contact)
 
         elif args[0] == "fav":
-            if agenda is None:
-                print("fail: agenda não inicializada")
-                continue
             name = args[1]
             contact = agenda.getContact(name)
-
-            if contact is None:
-                print("fail: contato não existe")
-                continue
-            
-            contact.toggleFavorited()
+            if contact:
+                contact.toogleFavorited()
+            else:
+                print("fail: contato nao existe")
 
         elif args[0] == "unfav":
             if agenda is None:
