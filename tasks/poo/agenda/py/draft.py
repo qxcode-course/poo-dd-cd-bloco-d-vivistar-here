@@ -36,7 +36,7 @@ class Contact:
         else:
             print("fail: indice invalido")
 
-    def toggleFavorited(self) -> None:
+    def toogleFavorited(self):
         self.__favorited = not self.__favorited
 
     def isFavorited(self) -> bool:
@@ -53,8 +53,8 @@ class Contact:
 
     def __str__(self) -> str:
         prefix = "@ " if self.__favorited else "- "
-        phones_str = ", ".join([f"{i}:{str(fone)}" for i, fone in enumerate(self.__fones)])
-        return f"{prefix}{self.__name} [{phones_str}]"
+        fones_str = ", ".join([f"{i}:{fone}" for i, fone in enumerate(self.__fones)])
+        return f"{fav} {self.__name} [{fones_str}]"
 
 class Agenda:
     def __init__(self):
@@ -66,76 +66,65 @@ class Agenda:
                 return i
         return -1
 
-    def addContact(self, name: str, fones: List[Fone]):
+    def addContact(self, name: str, fones: List[List[str]]):
         pos = self.__findPosByName(name)
-        if pos != -1:
-            contact = self.__contacts[pos]
-            for fone in fones:
-                contact.addFone(fone.getId(), fone.getNumber())
-        else:
-            novo = Contact(name)
-            for fone in fones:
-                novo.addFone(fone.getId(), fone.getNumber())
-            self.__contacts.append(novo)
+        if pos == -1:
+            contact = Contact(name)
+            for id, number in fones:
+                contact.addFone(id, number)
+            self.__contacts.append(contact)
             self.__contacts.sort(key=lambda contact: contact.getName())
+        else:
+            contact = self.__contacts[pos]
+            for id, number in fones:
+                contact.addFone(id, number)
+            
 
     def getContact(self, name: str):
-        for contact in self.__contacts:
-            if contact.getName() == name:
-                return contact 
-        return None
+        pos = self.__findPosByName(name)
+        return self.__contacts[pos] if pos != -1 else None
 
     def rmContact(self, name: str):
         pos = self.__findPosByName(name)
-        if pos == -1:
-            print("fail: contato não existe")
-        else:
+        if pos != -1:
             self.__contacts.pop(pos)
+        else:
+            print("fail: contato nao existe")
+            
 
     def search(self, pattern: str) -> List[Contact]:
-        result = []
+        result: List[Contact] = []
         pattern = pattern.lower()
         for contact in self.__contacts:
-            name_match = pattern in contact.getName().lower()
-            fone_match = False
-
+            if pattern in contact.getName().lower():
+                results.append(contact)
+                continue
             for fone in contact.getFones():
-                if pattern in fone.getId().lower() or pattern in fone.getNumber().lower():
-                    fone_match = True
+                if pattern in fone.getId().lower() or pattern in fone.getNumber():
+                    result.append(contact)
                     break
-            
-            if name_match or fone_match:
-                result.append(contact)
         return result
     
-    def getFavorited(self):
-        result = []
-        for contact in self.__contacts:
-            if contact.isFavorited():
-                result.append(contact)
-        return result
+    def getFavorited(self) -> List[Contact]:
+        return [contact for contact in self.__contacts if contact.isFavorited()]
 
-    def getContacts(self):
+    def getContacts(self) -> List[Contact]:
         return self.__contacts
 
-    def __str__(self) -> str:
-        result = []
-        for contact in self.__contacts:
-            result.append(str(contact))
-        return "\n".join(result)
+    def __str__(self):
+        if not self.__contacts:
+            return ""
+        return "\n".join(str(contact) for contact in self.__contacts)
 
 def main():
-    agenda = None
+    agenda = Agenda()
     while True:
         line = input()
         args = line.split(" ")
-        print(f"${line}")
+        print("$" + line)
 
         if args[0] == "end":
             break
-        
-        elif args[0] == "init":
-            agenda = Agenda()
 
         elif args[0] == "add":
             if agenda is None:
